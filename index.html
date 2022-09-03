@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="general.css">
+  
+  <title>Calculator app</title>
+</head>
+<body class="" id="body">
+
+  <main>
+    <section class="theme">
+      <h2>calc</h2>
+      <div class="theme__change-theme">
+        <h6>THEME</h6>
+        <div class="theme__toggle">
+          <button id="toTheme1" class="theme__btn"></button>
+          <button id="toTheme2" class="theme__btn"></button>
+          <button id="toTheme3" class="theme__btn"></button>
+          <div class="theme__circ"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="outputs" id="outputs">
+      <h1 id="outputs-number-prev"></h1>
+      <h1 id="outputs-number-curr">0</h1>
+    </section>
+
+    <section class="input">
+      <div class="input__container">
+        <button class="input__btn-style1 number input__btn-style">7</button>
+        <button class="input__btn-style1 number input__btn-style">8</button>
+        <button class="input__btn-style1 number input__btn-style">9</button>
+        <button class="input__btn-style2 input__btn-style" id="delete">DEL</button>
+        <button class="input__btn-style1 number input__btn-style">4</button>
+        <button class="input__btn-style1 number input__btn-style">5</button>
+        <button class="input__btn-style1 number input__btn-style">6</button>
+        <button class="input__btn-style1 operator input__btn-style">+</button>
+        <button class="input__btn-style1 number input__btn-style">1</button>
+        <button class="input__btn-style1 number input__btn-style">2</button>
+        <button class="input__btn-style1 number input__btn-style">3</button>
+        <button class="input__btn-style1 operator input__btn-style">-</button>
+        <button class="input__btn-style1 operator input__btn-style">.</button>
+        <button class="input__btn-style1 number input__btn-style">0</button>
+        <button class="input__btn-style1 operator input__btn-style">/</button>
+        <button class="input__btn-style1 operator input__btn-style">x</button>
+        <button class="input__btn-style2 input__btn-style span2" id="reset">RESET</button>
+        <button class="input__btn-style3 input__btn-style span2" id="equal">=</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="theme.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

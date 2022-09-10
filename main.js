@@ -7,11 +7,26 @@ const reset = document.querySelector("#reset")
 const equal = document.querySelector("#equal")
 const outputs = document.querySelector("#outputs")
 
+
 number.forEach(each => {
     each.addEventListener("click", () =>{
-        if (screenc.innerHTML[0] == "0" && screenc.innerHTML[1] !== "." ) {
-            screenc.innerHTML = each.innerHTML
-        }else{
+        const reg = /[+-\/x]/
+        const str = /[a-wyz]/i
+
+        if (screenc.innerHTML == "0") {
+            screenc.innerHTML = ""
+            screenc.innerHTML += each.innerHTML
+        }else if(screenc.innerHTML !== "0"){
+            screenc.innerHTML += each.innerHTML
+        }
+
+        if (screenc.innerHTML.at(-2)!=="." && screenc.innerHTML.at(-2).match(reg)) {
+            screenp.innerHTML = screenc.innerHTML.slice(0,-1)
+            screenc.innerHTML = ""
+            screenc.innerHTML += each.innerHTML
+        }
+        if (screenc.innerHTML.match(str)) {
+            screenc.innerHTML = ""
             screenc.innerHTML += each.innerHTML
         }
     })
@@ -19,46 +34,77 @@ number.forEach(each => {
 
 operator.forEach(each => {
     each.addEventListener("click", () => {
+
+        const reg = /[+-\/x]/
+        const str = /[a-wyz]/i
         debugger
-        let isnum = /[0-9]/
-        if (each.innerHTML !== "." && screenp.innerHTML.length > 0) {
-            screenp.innerHTML = screenp.innerHTML.slice(0,-1) + " " + each.innerHTML
-        }
-        if (screenc.innerHTML[screenc.innerHTML.length-1].match(isnum) && each.innerHTML!==".") {
+        if (screenc.innerHTML !== "" && screenc.innerHTML!=="0" && !screenc.innerHTML.at(-1).match(reg) && each.innerHTML!=="." && !screenc.innerHTML.match(str)) {
 
-            if (screenp.innerHTML=="") {
-                screenp.innerHTML = screenc.innerHTML + " " + each.innerHTML
-            }else if (screenp.innerHTML.at(-1) == "+") {
-                screenp.innerHTML = (Number(screenp.innerHTML.slice(0,-1))+Number(screenc.innerHTML)) + " " + each.innerHTML
-            }else if (screenp.innerHTML.at(-1) == "-") {
-                screenp.innerHTML = (Number(screenp.innerHTML.slice(0,-1))-Number(screenc.innerHTML)) + " " + each.innerHTML
-            }else if (screenp.innerHTML.at(-1) == "x") {
-                screenp.innerHTML = (Number(screenp.innerHTML.slice(0,-1))*Number(screenc.innerHTML)) + " " + each.innerHTML
-            }else if (screenp.innerHTML.at(-1) == "/") {
-                screenp.innerHTML = (Number(screenp.innerHTML.slice(0,-1))/Number(screenc.innerHTML)) + " " + each.innerHTML
-            }
-            screenc.innerHTML = ""
+                screenc.innerHTML += each.innerHTML
 
-        }else if (each.innerHTML == "." && screenc.innerHTML.indexOf(".") == -1){
+                if(screenp.innerHTML.at(-1).match(reg)){
+
+                    if (screenp.innerHTML.at(-1) == "+") {
+                        screenp.innerHTML = Number(screenp.innerHTML.slice(0,-1)) + Number(screenc.innerHTML.slice(0,-1))
+                    }else if (screenp.innerHTML.at(-1) == "-") {
+                        screenp.innerHTML = Number(screenp.innerHTML.slice(0,-1)) - Number(screenc.innerHTML.slice(0,-1))
+                    }else if (screenp.innerHTML.at(-1) == "x") {
+                        screenp.innerHTML = Number(screenp.innerHTML.slice(0,-1)) * Number(screenc.innerHTML.slice(0,-1))
+                    }else if (screenp.innerHTML.at(-1) == "/") {
+                        screenp.innerHTML = Number(screenp.innerHTML.slice(0,-1)) / Number(screenc.innerHTML.slice(0,-1))
+                    }
+                    screenp.innerHTML += each.innerHTML
+                    screenc.innerHTML = ""
+                }
+            
+        }else if (screenc.innerHTML == "") {
+            screenp.innerHTML = screenp.innerHTML.slice(0,-1)
+            screenp.innerHTML += each.innerHTML
+        }else if(screenc.innerHTML.at(-1).match(reg)){
+            screenc.innerHTML = screenc.innerHTML.slice(0,-1)
             screenc.innerHTML += each.innerHTML
         }
+        
+
+        if (each.innerHTML == "." && screenc.innerHTML.indexOf(".") == -1) {
+            screenc.innerHTML += each.innerHTML
+        }
+
         if (screenc.innerHTML.length >=14) {
-            outputs.style.justifyContent = "flex-start"
+            outputs.classList.remove("justify-end")
+            outputs.classList.add("justify-start")
         }else if (screenc.innerHTML.length < 14) {
-            outputs.style.justifyContent = "flex-end"
+            outputs.classList.remove("justify-start")
+            outputs.classList.add("justify-end")
         }
         
     })
 })
 
 delet.addEventListener("click", () => {
+    const str = /[a-wyz]/i
+
     screenc.innerHTML = screenc.innerHTML.slice(0,-1)
     if (screenc.innerHTML === "") {
         screenc.innerHTML = "0"
     }
+    if (screenc.innerHTML.length >=14) {
+        outputs.classList.remove("justify-end")
+        outputs.classList.add("justify-start")
+    }else if (screenc.innerHTML.length < 14) {
+        outputs.classList.remove("justify-start")
+        outputs.classList.add("justify-end")
+    }
+    if (screenc.innerHTML.match(str)) {
+        screenc.innerHTML = ""
+        screenc.innerHTML += each.innerHTML
+    }
 })
 
 reset.addEventListener("click", () =>{
+    debugger
+    outputs.classList.remove("justify-start")
+    outputs.classList.add("justify-end")
     screenp.innerHTML = ""
     screenc.innerHTML = "0"
 })
@@ -77,9 +123,11 @@ equal.addEventListener("click", () =>{
     }
     screenp.innerHTML = ""
     if (screenc.innerHTML.length >=14) {
-        outputs.style.justifyContent = "flex-start"
+        outputs.classList.remove("justify-end")
+        outputs.classList.add("justify-start")
     }else if (screenc.innerHTML.length < 14) {
-        outputs.style.justifyContent = "flex-end"
+        outputs.classList.remove("justify-start")
+        outputs.classList.add("justify-end")
     }
 })
 

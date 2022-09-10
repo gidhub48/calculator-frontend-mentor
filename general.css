@@ -19,6 +19,7 @@
     --equal-sign-color:hsl(0, 0%, 100%);
     --top-color:hsl(0, 0%, 100%);
     --border-radius: 0.4rem;
+    accent-color: lime;
 }
 
 body.theme2 {
@@ -107,9 +108,14 @@ main{
 .input__container .span2{
     grid-column: span 2;
 }
+.justify-end{
+    justify-content:flex-end;
+}
+.justify-start{
+    justify-content:flex-start;
+}
 .outputs{
     display: flex;
-    justify-content: flex-end;
     flex-wrap: nowrap;
     font-size: 1.6rem;
     background-color: var(--output-background);
@@ -183,6 +189,7 @@ main{
     border-radius: 20px;
     background-color: var(--input-background);
     color: var(--top-color);
+    transition: all 0.3s;
 }
 .theme__toggle::after{
     content: "1 2 3";
@@ -191,12 +198,12 @@ main{
     text-align: justify;
     width: 90px;
     top: -65%;
-    letter-spacing: 0.35rem;
+    letter-spacing: 0.333rem;
+    padding-left: 0.055rem;
     left: 7%;
     color: var(--top-color);
     transition: all 0.35s;
 }
-
 
 .theme__circ{
     position: absolute;
@@ -208,6 +215,7 @@ main{
     background-color: var(--result-key-border);
     transition: all 0.35s;
     color: var(--top-color);
+    
 }
 .theme__circ:hover{
     background-color: var(--result-key-hover);
@@ -221,6 +229,11 @@ main{
     padding: 0;margin: 0;
     cursor: pointer;
     border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
 }
 #toTheme2{
     left: 30px;
@@ -228,3 +241,4 @@ main{
 #toTheme3{
     left: 60px;
 }
+
